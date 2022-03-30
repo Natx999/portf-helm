@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.config.name }}
+data:
+  MONGODB_URI: "{{ .Values.config.data.mongoUri }}"
+  LOG_LEVEL:  "{{ .Values.config.data.logLevel }}"
+  PERSISTENCE:  "{{ .Values.config.data.PERSISTENCE }}"

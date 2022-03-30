@@ -1,0 +1,38 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ .Values.storage.name }}
+provisioner: {{ .Values.storage.provisioner }}
+parameters:
+  type: {{ .Values.storage.parameters.type }}
+  fstype: {{ .Values.storage.parameters.fstype }}
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: csi-data-volume
+# spec:
+#   capacity:
+#     storage: 5Gi
+#   volumeMode: Filesystem
+#   accessModes:
+#     - ReadWriteOnce
+#   mountOptions:
+#     - tls
+#   persistentVolumeReclaimPolicy: Retain
+#   storageClassName: {{ .Values.storage.name }}
+#   csi:
+#     driver: efs.csi.aws.com
+#     volumeHandle: fs-38f413bx
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: csi-data-volume-claim
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   storageClassName: {{ .Values.storage.name }}
+#   resources:
+#     requests:
+#       storage: 5Gi

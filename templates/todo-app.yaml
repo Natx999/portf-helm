@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}
+  labels: 
+    app: "{{ .Values.app.appName }}"
+spec:
+  replicas: {{ .Values.app.replicaCount }}
+  selector:
+    matchLabels:
+      app: "{{ .Values.app.appName }}"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Values.app.appName }}"
+    spec:
+      containers:
+      - name: "{{ .Values.app.appName }}"
+        image: "{{ .Values.app.image }}"  
+        resources:
+          requests:
+            memory: {{ .Values.app.resources.requests.memory }}
+            cpu: {{ .Values.app.resources.requests.cpu }}
+            ephemeral-storage: {{ .Values.app.resources.requests.ephemeralStorage }}
+          limits:
+            memory: {{ .Values.app.resources.limits.memory }}
+            cpu: {{ .Values.app.resources.limits.cpu }}
+            ephemeral-storage: {{ .Values.app.resources.limits.ephemeralStorage }}
+        ports: 
+          - containerPort: {{ .Values.app.ports.containerPort }}
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.app.env.confMapRef.name }}
+        env:
+        - name: {{ .Values.app.env.mongoURL.name }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.app.env.mongoURL.secretKeyRef.name }}
+              key:  {{ .Values.app.env.mongoURL.secretKeyRef.key }}
