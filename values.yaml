@@ -6,7 +6,7 @@ app:
   ports:
     containerPort: 5000
   image: "public.ecr.aws/c7o8u9c1/nathan-todo:1.0.6"
-  replicaCount: 3
+  replicaCount: 1
   appName: todo-app
   resources:
     requests:
