@@ -48,10 +48,10 @@ podAnnotations: {}
 
 resources:
   requests:
-    cpu: "400m"
+    cpu: "64m"
     memory: "2Gi"
   limits:
-    cpu: "400m"
+    cpu: "1000m"
     memory: "2Gi"
 
 protocol: http
